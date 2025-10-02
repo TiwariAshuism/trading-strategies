@@ -36,7 +36,7 @@ echo "🔍 Running system diagnostic..."
 python diagnostic.py
 
 echo ""
-echo "✅ Setup complete!"
+echo " Setup complete!"
 echo ""
 echo "🎯 To use the trading system:"
 echo "   1. Activate environment: source env/bin/activate"

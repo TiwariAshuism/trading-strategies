@@ -14,7 +14,7 @@ class EmojiHandler:
     EMOJI_MAP = {
         # System and status emojis
         '🚀': '[LAUNCH]',
-        '✅': '[OK]',
+        '': '[OK]',
         '': '[ERROR]',
         '⚠️': '[WARNING]',
         '💡': '[TIP]',
@@ -140,7 +140,7 @@ class EmojiHandler:
                 return True
             
             # Test print
-            test_emoji = '✅'
+            test_emoji = ''
             sys.stdout.write(test_emoji)
             sys.stdout.flush()
             return True
@@ -197,7 +197,7 @@ def test_emoji_handling():
     """Test emoji handling capabilities"""
     test_texts = [
         "🚀 System starting...",
-        "✅ All tests passed!",
+        " All tests passed!",
         " Error occurred",
         "📊 Portfolio Analysis",
         "🎯 Trading Signals",

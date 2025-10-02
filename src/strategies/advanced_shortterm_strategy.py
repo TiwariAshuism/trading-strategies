@@ -39,7 +39,7 @@ except ImportError:
         try:
             print(text, end=end, flush=flush)
         except UnicodeEncodeError:
-            text = str(text).replace("🚀", "[LAUNCH]").replace("✅", "[OK]").replace("", "[ERROR]").replace("📊", "[CHART]").replace("🎯", "[TARGET]")
+            text = str(text).replace("🚀", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]").replace("📊", "[CHART]").replace("🎯", "[TARGET]")
             print(text, end=end, flush=flush)
     
     def format_text(text):
@@ -574,11 +574,11 @@ class AdvancedShortTermStrategy:
         print(f"\n📈 TECHNICAL ANALYSIS")
         print("-" * 40)
         print(f"RSI: {tech_indicators['rsi_current']:.1f} ({'Oversold' if tech_indicators['rsi_oversold'] else 'Overbought' if tech_indicators['rsi_overbought'] else 'Normal'})")
-        print(f"Golden Cross: {'✅' if tech_indicators['golden_cross'] else ''}")
-        print(f"Death Cross: {'⚠️' if tech_indicators['death_cross'] else '✅'}")
-        print(f"MACD Bullish: {'✅' if tech_indicators['macd_bullish_crossover'] else ''}")
+        print(f"Golden Cross: {'' if tech_indicators['golden_cross'] else ''}")
+        print(f"Death Cross: {'⚠️' if tech_indicators['death_cross'] else ''}")
+        print(f"MACD Bullish: {'' if tech_indicators['macd_bullish_crossover'] else ''}")
         print(f"BB Breakout: {'📈 Up' if tech_indicators['bb_breakout_up'] else '📉 Down' if tech_indicators['bb_breakout_down'] else '➡️ None'}")
-        print(f"High Volume: {'✅' if tech_indicators['high_volume'] else ''}")
+        print(f"High Volume: {'' if tech_indicators['high_volume'] else ''}")
         
         # Candlestick Patterns
         patterns = self.signals['candlestick_patterns']

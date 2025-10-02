@@ -30,7 +30,7 @@ except ImportError:
         try:
             print(text, end=end, flush=flush)
         except UnicodeEncodeError:
-            text = str(text).replace("🚀", "[LAUNCH]").replace("✅", "[OK]").replace("", "[ERROR]").replace("🌐", "[WEB]").replace("📡", "[FEED]").replace("💾", "[DATA]")
+            text = str(text).replace("🚀", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]").replace("🌐", "[WEB]").replace("📡", "[FEED]").replace("💾", "[DATA]")
             print(text, end=end, flush=flush)
     
     def format_text(text):
@@ -97,7 +97,7 @@ class TradingSystemController:
                 process.terminate()
                 process.wait(timeout=10)
                 del self.processes[component]
-                logger.info(f"✅ {component} stopped")
+                logger.info(f" {component} stopped")
                 return True
             else:
                 logger.warning(f"Component {component} not running")
@@ -115,7 +115,7 @@ class TradingSystemController:
         # Initialize database first
         print("1️⃣ Initializing database...")
         if self.start_component("database"):
-            print("   ✅ Database ready")
+            print("    Database ready")
         else:
             print("    Database initialization failed")
             return False
@@ -123,7 +123,7 @@ class TradingSystemController:
         # Start data feed
         print("2️⃣ Starting real-time data feed...")
         if self.start_component("datafeed"):
-            print("   ✅ Data feed running")
+            print("    Data feed running")
             time.sleep(2)
         else:
             print("    Data feed failed to start")
@@ -131,7 +131,7 @@ class TradingSystemController:
         # Start web dashboard
         print("3️⃣ Starting web dashboard...")
         if self.start_component("dashboard"):
-            print("   ✅ Dashboard running")
+            print("    Dashboard running")
             time.sleep(3)
         else:
             print("    Dashboard failed to start")
@@ -158,7 +158,7 @@ class TradingSystemController:
             self.stop_component(component)
         
         self.running = False
-        logger.info("✅ All components stopped")
+        logger.info(" All components stopped")
     
     def run_analysis(self, symbol: str):
         """Run quick analysis for a symbol"""
@@ -228,7 +228,7 @@ if result:
         try:
             import requests
             response = requests.get("http://localhost:8501", timeout=5)
-            print("🌐 Web Dashboard: ✅ Running")
+            print("🌐 Web Dashboard:  Running")
         except:
             print("🌐 Web Dashboard:  Not accessible")
         

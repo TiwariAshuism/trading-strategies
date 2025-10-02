@@ -20,11 +20,11 @@ except ImportError:
         try:
             print(text, end=end, flush=flush)
         except UnicodeEncodeError:
-            text = text.replace("🔍", "[INFO]").replace("📦", "[MODULES]").replace("🐍", "[PATH]").replace("🔧", "[TRADING]").replace("✅", "[OK]").replace("", "[ERROR]")
+            text = text.replace("🔍", "[INFO]").replace("📦", "[MODULES]").replace("🐍", "[PATH]").replace("🔧", "[TRADING]").replace("", "[OK]").replace("", "[ERROR]")
             print(text, end=end, flush=flush)
     
     def replace_emojis(text):
-        return text.replace("🔍", "[INFO]").replace("📦", "[MODULES]").replace("🐍", "[PATH]").replace("🔧", "[TRADING]").replace("✅", "[OK]").replace("", "[ERROR]")
+        return text.replace("🔍", "[INFO]").replace("📦", "[MODULES]").replace("🐍", "[PATH]").replace("🔧", "[TRADING]").replace("", "[OK]").replace("", "[ERROR]")
 
 def check_module(module_name):
     try:
@@ -33,7 +33,7 @@ def check_module(module_name):
             import bs4
         else:
             __import__(module_name)
-        return "✅ " + module_name
+        return " " + module_name
     except ImportError:
         return " " + module_name + " (missing)"
 
@@ -62,13 +62,13 @@ def main():
     safe_print("\n🔧 Trading Modules:")
     try:
         from src.data.database_manager import TradingDatabase
-        safe_print("  ✅ database_manager")
+        safe_print("   database_manager")
     except Exception as e:
         safe_print(f"   database_manager: {e}")
     
     try:
         from src.strategies.advanced_shortterm_strategy import AdvancedShortTermStrategy
-        safe_print("  ✅ advanced_shortterm_strategy")
+        safe_print("   advanced_shortterm_strategy")
     except Exception as e:
         safe_print(f"   advanced_shortterm_strategy: {e}")
     

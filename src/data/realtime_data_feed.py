@@ -428,7 +428,7 @@ def main():
     except KeyboardInterrupt:
         print("\n🛑 Stopping data feed...")
         feed.stop_feed()
-        print("✅ Data feed stopped.")
+        print(" Data feed stopped.")
 
 if __name__ == "__main__":
     main()

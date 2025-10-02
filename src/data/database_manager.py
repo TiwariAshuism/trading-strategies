@@ -28,7 +28,7 @@ except ImportError:
         try:
             print(text, end=end, flush=flush)
         except UnicodeEncodeError:
-            text = str(text).replace("✅", "[OK]").replace("", "[ERROR]").replace("💾", "[DATA]")
+            text = str(text).replace("", "[OK]").replace("", "[ERROR]").replace("💾", "[DATA]")
             print(text, end=end, flush=flush)
     
     def format_text(text):

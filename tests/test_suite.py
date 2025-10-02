@@ -408,7 +408,7 @@ def run_performance_benchmark():
         print(f"📊 Strategy Analysis Time: {analysis_time:.2f} seconds")
         
         if analysis_time < 30:
-            print("   ✅ Performance: Good")
+            print("    Performance: Good")
         elif analysis_time < 60:
             print("   ⚠️ Performance: Acceptable")
         else:
@@ -513,7 +513,7 @@ def main():
     
     # Overall result
     if len(result.failures) == 0 and len(result.errors) == 0:
-        print(f"\n✅ All tests passed! System is ready for use.")
+        print(f"\n All tests passed! System is ready for use.")
     else:
         print(f"\n⚠️ Some tests failed. Please review before using the system.")
     

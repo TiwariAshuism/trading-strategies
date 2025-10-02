@@ -24,7 +24,7 @@ class TradingSystemSetup:
             print(" Python 3.8 or higher is required")
             return False
         
-        print("✅ Python version compatible")
+        print(" Python version compatible")
         return True
     
     def setup_virtual_environment(self):
@@ -36,7 +36,7 @@ class TradingSystemSetup:
             try:
                 subprocess.run([sys.executable, "-m", "venv", "env"], 
                              cwd=self.project_root, check=True)
-                print("✅ Virtual environment created")
+                print(" Virtual environment created")
             except subprocess.CalledProcessError as e:
                 print(f" Error creating virtual environment: {e}")
                 return False
@@ -65,7 +65,7 @@ class TradingSystemSetup:
         try:
             subprocess.run([pip_cmd, "install", "--upgrade", "pip"], 
                          check=True, capture_output=True)
-            print("✅ Pip upgraded")
+            print(" Pip upgraded")
         except subprocess.CalledProcessError as e:
             print(f"⚠️ Warning: Could not upgrade pip: {e}")
         
@@ -73,7 +73,7 @@ class TradingSystemSetup:
         try:
             subprocess.run([pip_cmd, "install", "-r", "requirements.txt"], 
                          cwd=self.project_root, check=True)
-            print("✅ Dependencies installed")
+            print(" Dependencies installed")
             return True
         except subprocess.CalledProcessError as e:
             print(f" Error installing dependencies: {e}")
@@ -103,7 +103,7 @@ class TradingSystemSetup:
             content = f"""@echo off
 cd /d "{self.project_root}"
 call env\\Scripts\\activate.bat
-echo ✅ Trading system environment activated!
+echo  Trading system environment activated!
 echo.
 echo 🎯 Available commands:
 echo   python trading_control_panel.py --start-all
@@ -118,7 +118,7 @@ cmd /k
             content = f"""#!/bin/bash
 cd "{self.project_root}"
 source env/bin/activate
-echo "✅ Trading system environment activated!"
+echo " Trading system environment activated!"
 echo ""
 echo "🎯 Available commands:"
 echo "  python scripts/trading_control_panel.py --start-all"
@@ -174,7 +174,7 @@ exec "$SHELL"
         print("="*60)
         
         if diagnostic_ok:
-            print("✅ All systems ready!")
+            print(" All systems ready!")
         else:
             print("⚠️ Setup complete but some issues detected")
         

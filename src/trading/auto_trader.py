@@ -294,7 +294,7 @@ class AutoTrader:
                 # Schedule stop loss and take profit orders
                 self._schedule_exit_orders(symbol, signal, quantity)
                 
-                logger.info(f"✅ Trade executed: {signal.direction} {quantity} {symbol} at ₹{signal.entry_price:.2f}")
+                logger.info(f" Trade executed: {signal.direction} {quantity} {symbol} at ₹{signal.entry_price:.2f}")
                 return True
             
         except Exception as e:

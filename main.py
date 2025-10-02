@@ -22,14 +22,14 @@ except ImportError:
             print(text, end=end, flush=flush)
         except UnicodeEncodeError:
             # Basic emoji replacement
-            text = str(text).replace("🚀", "[LAUNCH]").replace("✅", "[OK]").replace("", "[ERROR]").replace("📊", "[CHART]").replace("🎯", "[TARGET]").replace("🔧", "[TOOL]")
+            text = str(text).replace("🚀", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]").replace("📊", "[CHART]").replace("🎯", "[TARGET]").replace("🔧", "[TOOL]")
             print(text, end=end, flush=flush)
     
     def format_text(text):
         try:
             return text
         except UnicodeEncodeError:
-            return str(text).replace("🚀", "[LAUNCH]").replace("✅", "[OK]").replace("", "[ERROR]")
+            return str(text).replace("🚀", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]")
 
 def main():
     header = """

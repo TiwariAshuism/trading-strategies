@@ -294,9 +294,9 @@ def show_live_analysis(db):
                     
                     st.markdown("#### 📊 Technical Indicators")
                     st.metric("RSI", f"{tech_indicators['rsi_current']:.1f}")
-                    st.write(f"Golden Cross: {'✅' if tech_indicators['golden_cross'] else ''}")
-                    st.write(f"MACD Bullish: {'✅' if tech_indicators['macd_bullish_crossover'] else ''}")
-                    st.write(f"High Volume: {'✅' if tech_indicators['high_volume'] else ''}")
+                    st.write(f"Golden Cross: {'' if tech_indicators['golden_cross'] else ''}")
+                    st.write(f"MACD Bullish: {'' if tech_indicators['macd_bullish_crossover'] else ''}")
+                    st.write(f"High Volume: {'' if tech_indicators['high_volume'] else ''}")
                 
                 # Reasoning
                 st.subheader("🧠 Analysis Reasoning")
@@ -567,7 +567,7 @@ def show_settings():
     if abs(total_weight - 1.0) > 0.01:
         st.warning(f"⚠️ Weights sum to {total_weight:.2f}. They should sum to 1.0")
     else:
-        st.success("✅ Weights are properly balanced")
+        st.success(" Weights are properly balanced")
     
     if st.button("💾 Save Configuration"):
         # Update configuration (this would save to config file)
