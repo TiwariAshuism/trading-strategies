@@ -155,11 +155,11 @@ def show_dashboard(db):
         # Color code by direction
         def highlight_direction(row):
             if row['direction'] == 'BUY':
-                return ['background-color: #d4edda'] * len(row)
+                return ['background-color: #155724; color: #d4edda'] * len(row)
             elif row['direction'] == 'SELL':
-                return ['background-color: #f8d7da'] * len(row)
+                return ['background-color: #721c24; color: #f8d7da'] * len(row)
             else:
-                return ['background-color: #fff3cd'] * len(row)
+                return ['background-color: #856404; color: #fff3cd'] * len(row)
         
         st.dataframe(
             display_df.style.apply(highlight_direction, axis=1),

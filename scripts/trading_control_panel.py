@@ -54,28 +54,28 @@ class TradingSystemController:
             if component == "dashboard":
                 # Start Streamlit dashboard
                 cmd = [sys.executable, "-m", "streamlit", "run", "src/ui/streamlit_dashboard.py", "--server.port", "8501"]
-                process = subprocess.Popen(cmd, cwd=self.project_root)
+                process = subprocess.Popen(cmd, cwd=self.project_root.resolve().parent)
                 self.processes["dashboard"] = process
                 logger.info("🌐 Web Dashboard started on http://localhost:8501")
                 
             elif component == "datafeed":
                 # Start simple data feed (no WebSocket complexity)
                 cmd = [sys.executable, "src/data/simple_data_feed.py"]
-                process = subprocess.Popen(cmd, cwd=self.project_root)
+                process = subprocess.Popen(cmd, cwd=self.project_root.resolve().parent)
                 self.processes["datafeed"] = process
                 logger.info("📡 Simple Data Feed started (no WebSocket server needed)")
                 
             elif component == "autotrader":
                 # Start automated trader
                 cmd = [sys.executable, "src/trading/auto_trader.py"]
-                process = subprocess.Popen(cmd, cwd=self.project_root)
+                process = subprocess.Popen(cmd, cwd=self.project_root.resolve().parent)
                 self.processes["autotrader"] = process
                 logger.info("🤖 Automated Trader started")
                 
             elif component == "database":
                 # Initialize database
                 cmd = [sys.executable, "src/data/database_manager.py"]
-                subprocess.run(cmd, cwd=self.project_root, check=True)
+                subprocess.run(cmd, cwd=self.project_root.resolve().parent, check=True)
                 logger.info("💾 Database initialized")
                 return True
                 
