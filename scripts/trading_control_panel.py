@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Master Control Panel for Advanced Trading System
-Centralized launcher and coordinator for        print(f"🎯 System Status:")
+Centralized launcher and coordinator for        print(f" System Status:")
         print(f"   🌐 Web Dashboard: http://localhost:8501")
         print(f"   📡 Data Feed: Running (simple mode)")
         print(f"   💾 Database: trading_data.db") trading components.
@@ -16,6 +16,25 @@ import argparse
 from datetime import datetime
 import logging
 from pathlib import Path
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
+# Import emoji handler
+try:
+    from src.utils.emoji_handler import safe_print, format_text
+except ImportError:
+    # Fallback if emoji handler not available
+    def safe_print(text, end='\n', flush=False):
+        try:
+            print(text, end=end, flush=flush)
+        except UnicodeEncodeError:
+            text = str(text).replace("", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]").replace("🌐", "[WEB]").replace("📡", "[FEED]").replace("💾", "[DATA]")
+            print(text, end=end, flush=flush)
+    
+    def format_text(text):
+        return text
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -78,7 +97,7 @@ class TradingSystemController:
                 process.terminate()
                 process.wait(timeout=10)
                 del self.processes[component]
-                logger.info(f"✅ {component} stopped")
+                logger.info(f" {component} stopped")
                 return True
             else:
                 logger.warning(f"Component {component} not running")
@@ -90,34 +109,34 @@ class TradingSystemController:
     
     def start_full_system(self):
         """Start the complete trading system"""
-        logger.info("🚀 Starting Complete Trading System")
+        logger.info(" Starting Complete Trading System")
         print("=" * 60)
         
         # Initialize database first
         print("1️⃣ Initializing database...")
         if self.start_component("database"):
-            print("   ✅ Database ready")
+            print("    Database ready")
         else:
-            print("   ❌ Database initialization failed")
+            print("    Database initialization failed")
             return False
         
         # Start data feed
         print("2️⃣ Starting real-time data feed...")
         if self.start_component("datafeed"):
-            print("   ✅ Data feed running")
+            print("    Data feed running")
             time.sleep(2)
         else:
-            print("   ❌ Data feed failed to start")
+            print("    Data feed failed to start")
         
         # Start web dashboard
         print("3️⃣ Starting web dashboard...")
         if self.start_component("dashboard"):
-            print("   ✅ Dashboard running")
+            print("    Dashboard running")
             time.sleep(3)
         else:
-            print("   ❌ Dashboard failed to start")
+            print("    Dashboard failed to start")
         
-        print("\n🎯 System Status:")
+        print("\n System Status:")
         print(f"   🌐 Web Dashboard: http://localhost:8501")
         print(f"   📡 Data Feed: ws://localhost:8765")
         print(f"   💾 Database: trading_data.db")
@@ -139,7 +158,7 @@ class TradingSystemController:
             self.stop_component(component)
         
         self.running = False
-        logger.info("✅ All components stopped")
+        logger.info(" All components stopped")
     
     def run_analysis(self, symbol: str):
         """Run quick analysis for a symbol"""
@@ -184,7 +203,7 @@ if result:
     
     def show_status(self):
         """Show system status"""
-        print("\n📊 Trading System Status")
+        print("\n Trading System Status")
         print("=" * 40)
         
         # Check running processes
@@ -209,9 +228,9 @@ if result:
         try:
             import requests
             response = requests.get("http://localhost:8501", timeout=5)
-            print("🌐 Web Dashboard: ✅ Running")
+            print("🌐 Web Dashboard:  Running")
         except:
-            print("🌐 Web Dashboard: ❌ Not accessible")
+            print("🌐 Web Dashboard:  Not accessible")
         
         print(f"⏰ Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
@@ -233,10 +252,10 @@ def main():
     print("""
     ╔═══════════════════════════════════════════════════════════╗
     ║                                                           ║
-    ║        🚀 ADVANCED TRADING SYSTEM CONTROL PANEL          ║
+    ║         ADVANCED TRADING SYSTEM CONTROL PANEL          ║
     ║                                                           ║
-    ║    📊 Portfolio Analysis  📰 News Sentiment Analysis     ║
-    ║    🎯 Multi-Strategy      ⚡ Short-Term Signals          ║
+    ║     Portfolio Analysis  📰 News Sentiment Analysis     ║
+    ║     Multi-Strategy      ⚡ Short-Term Signals          ║
     ║    🌐 Web Dashboard       📡 Real-Time Data              ║
     ║    🤖 Auto Trading        💾 Data Persistence           ║
     ║                                                           ║
@@ -266,7 +285,7 @@ def main():
             controller.run_analysis(args.analyze)
         
         elif args.backtest:
-            print(f"📊 Running backtest for {args.backtest}...")
+            print(f" Running backtest for {args.backtest}...")
             controller.run_backtest(args.backtest)
         
         elif args.status:
@@ -274,7 +293,7 @@ def main():
         
         else:
             # Interactive mode
-            print("🎯 Interactive Mode")
+            print(" Interactive Mode")
             print("Available commands:")
             print("  1. Start full system")
             print("  2. Quick analysis")

@@ -12,38 +12,58 @@ from pathlib import Path
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
+# Import emoji handler
+try:
+    from src.utils.emoji_handler import safe_print, format_text
+except ImportError:
+    # Fallback if emoji handler not available
+    def safe_print(text, end='\n', flush=False):
+        try:
+            print(text, end=end, flush=flush)
+        except UnicodeEncodeError:
+            # Basic emoji replacement
+            text = str(text).replace("", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]").replace("", "[CHART]").replace("", "[TARGET]").replace("🔧", "[TOOL]")
+            print(text, end=end, flush=flush)
+    
+    def format_text(text):
+        try:
+            return text
+        except UnicodeEncodeError:
+            return str(text).replace("", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]")
+
 def main():
-    print("""
+    header = """
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║        🚀 ADVANCED TRADING SYSTEM                         ║
+║         ADVANCED TRADING SYSTEM                         ║
 ║                                                           ║
 ║    Professional Algorithmic Trading Platform             ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
-    """)
+    """
+    safe_print(header)
     
-    print("📋 Available Commands:")
-    print()
-    print("🎛️  System Control:")
-    print("   python main.py --start-all      Start complete system")
-    print("   python main.py --dashboard      Launch web dashboard")
-    print("   python main.py --setup          Run system setup")
-    print()
-    print("📊 Individual Strategies:")
-    print("   python main.py --portfolio      Portfolio analyzer")
-    print("   python main.py --screener       Multi-strategy screener")
-    print("   python main.py --news           News-based trading")
-    print("   python main.py --shortterm      Advanced short-term strategy")
-    print()
-    print("🔧 System Tools:")
-    print("   python main.py --test           Run test suite")
-    print("   python main.py --diagnostic     System diagnostic")
-    print("   python main.py --backtest       Strategy backtesting")
-    print()
+    safe_print("📋 Available Commands:")
+    safe_print("")
+    safe_print("🎛️  System Control:")
+    safe_print("   python main.py --start-all      Start complete system")
+    safe_print("   python main.py --dashboard      Launch web dashboard")
+    safe_print("   python main.py --setup          Run system setup")
+    safe_print("")
+    safe_print(" Individual Strategies:")
+    safe_print("   python main.py --portfolio      Portfolio analyzer")
+    safe_print("   python main.py --screener       Multi-strategy screener")
+    safe_print("   python main.py --news           News-based trading")
+    safe_print("   python main.py --shortterm      Advanced short-term strategy")
+    safe_print("")
+    safe_print("🔧 System Tools:")
+    safe_print("   python main.py --test           Run test suite")
+    safe_print("   python main.py --diagnostic     System diagnostic")
+    safe_print("   python main.py --backtest       Strategy backtesting")
+    safe_print("")
     
     if len(sys.argv) == 1:
-        print("💡 Run with --help or choose an option above")
+        safe_print("💡 Run with --help or choose an option above")
         return
     
     arg = sys.argv[1]
@@ -59,7 +79,7 @@ def main():
                 while controller.running:
                     time.sleep(1)
             except KeyboardInterrupt:
-                print("\n🛑 Shutdown signal received...")
+                safe_print("\n🛑 Shutdown signal received...")
                 controller.stop_full_system()
         
         elif arg == "--dashboard":
@@ -99,17 +119,17 @@ def main():
             main()
         
         elif arg == "--help":
-            print("Use any of the commands shown above")
+            safe_print("Use any of the commands shown above")
         
         else:
-            print(f"❌ Unknown command: {arg}")
-            print("Use python main.py --help for available commands")
+            safe_print(f" Unknown command: {arg}")
+            safe_print("Use python main.py --help for available commands")
     
     except ImportError as e:
-        print(f"❌ Import error: {e}")
-        print("💡 Try running: python main.py --setup")
+        safe_print(f" Import error: {e}")
+        safe_print("💡 Try running: python main.py --setup")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        safe_print(f" Error: {e}")
 
 if __name__ == "__main__":
     main()

@@ -194,7 +194,7 @@ class AutoTrader:
     def start_trading(self):
         """Start automated trading"""
         self.running = True
-        logger.info("🚀 Automated trading started")
+        logger.info(" Automated trading started")
     
     def stop_trading(self):
         """Stop automated trading"""
@@ -294,7 +294,7 @@ class AutoTrader:
                 # Schedule stop loss and take profit orders
                 self._schedule_exit_orders(symbol, signal, quantity)
                 
-                logger.info(f"✅ Trade executed: {signal.direction} {quantity} {symbol} at ₹{signal.entry_price:.2f}")
+                logger.info(f" Trade executed: {signal.direction} {quantity} {symbol} at ₹{signal.entry_price:.2f}")
                 return True
             
         except Exception as e:
@@ -524,7 +524,7 @@ def main():
     # Run strategy scan
     auto_trader.run_strategy_scan(test_symbols)
     
-    print(f"\n📊 Final Portfolio Summary:")
+    print(f"\n Final Portfolio Summary:")
     summary = auto_trader.get_portfolio_summary()
     for key, value in summary.items():
         print(f"  {key}: {value}")

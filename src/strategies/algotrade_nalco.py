@@ -737,7 +737,7 @@ def analyze_stock(ticker: str, period: str = "1y") -> Optional[Dict]:
     
     df = fetch_stock_data(ticker, period)
     if df.empty or len(df) < 50:
-        print("❌ Insufficient data")
+        print(" Insufficient data")
         return None
     
     # Calculate returns
@@ -1001,7 +1001,7 @@ def main():
         print(f"  ⚖️  Neutral sentiment - Mixed market behavior")
     
     if best['market_regime'] == 'Trending':
-        print(f"  🎯 Trending market - Momentum strategies favored")
+        print(f"   Trending market - Momentum strategies favored")
     elif best['market_regime'] == 'Ranging':
         print(f"  🔄 Ranging market - Mean reversion strategies favored")
     else:

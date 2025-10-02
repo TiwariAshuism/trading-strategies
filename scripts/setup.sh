@@ -4,12 +4,12 @@ Quick Setup Script for Trading System
 Activates virtual environment and installs dependencies
 """
 
-echo "🚀 Trading System Setup"
+echo " Trading System Setup"
 echo "======================"
 
 # Check if we're in the right directory
 if [ ! -f "requirements.txt" ]; then
-    echo "❌ Error: requirements.txt not found. Please run from the trading-strategies directory."
+    echo " Error: requirements.txt not found. Please run from the trading-strategies directory."
     exit 1
 fi
 
@@ -36,9 +36,9 @@ echo "🔍 Running system diagnostic..."
 python diagnostic.py
 
 echo ""
-echo "✅ Setup complete!"
+echo " Setup complete!"
 echo ""
-echo "🎯 To use the trading system:"
+echo " To use the trading system:"
 echo "   1. Activate environment: source env/bin/activate"
 echo "   2. Run control panel: python trading_control_panel.py --start-all"
 echo "   3. Or run individual components:"

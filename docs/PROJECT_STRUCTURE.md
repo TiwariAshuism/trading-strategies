@@ -25,9 +25,9 @@ trading-strategies/
 └── 📁 env/                   # Python virtual environment
 ```
 
-## 🎯 Detailed Module Structure
+##  Detailed Module Structure
 
-### 📊 src/strategies/ - Trading Strategies
+###  src/strategies/ - Trading Strategies
 ```
 strategies/
 ├── __init__.py
@@ -96,7 +96,7 @@ data/
 └── trading_data.db                # SQLite database (created when needed)
 ```
 
-## 🚀 Quick Start Guide
+##  Quick Start Guide
 
 ### Method 1: Main Entry Point (Recommended)
 ```bash
@@ -133,21 +133,21 @@ from src.config.strategy_config import CONFIG
 
 ## 🔄 Migration Benefits
 
-### ✅ Organization Benefits:
+###  Organization Benefits:
 - **Clear separation** of concerns
 - **Easy navigation** and maintenance  
 - **Professional structure** following Python best practices
 - **Scalable architecture** for future additions
 - **Better import management** with proper package structure
 
-### ✅ Usage Benefits:
+###  Usage Benefits:
 - **Single entry point** (`main.py`) for all features
 - **Consistent command interface** across all modules
 - **Easier deployment** and distribution
 - **Better error handling** with organized imports
 - **Professional appearance** for sharing/collaboration
 
-## 🎯 Development Workflow
+##  Development Workflow
 
 1. **Setup**: Run `python main.py --setup` or `python scripts/setup.py`
 2. **Development**: Work within the organized `src/` modules

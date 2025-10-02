@@ -13,6 +13,26 @@ import logging
 from typing import Dict, List, Optional, Any
 from pathlib import Path
 import hashlib
+import sys
+
+# Add project root to path for emoji handler
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+# Import emoji handler
+try:
+    from src.utils.emoji_handler import safe_print, format_text
+except ImportError:
+    # Fallback functions
+    def safe_print(text, end='\n', flush=False):
+        try:
+            print(text, end=end, flush=flush)
+        except UnicodeEncodeError:
+            text = str(text).replace("", "[OK]").replace("", "[ERROR]").replace("💾", "[DATA]")
+            print(text, end=end, flush=flush)
+    
+    def format_text(text):
+        return text
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)

@@ -414,8 +414,8 @@ def main():
     # Start data feed
     feed.start_feed()
     
-    print("🚀 Real-time data feed started!")
-    print(f"📊 Tracking: {', '.join(symbols)}")
+    print(" Real-time data feed started!")
+    print(f" Tracking: {', '.join(symbols)}")
     print("🌐 WebSocket server: ws://localhost:8765")
     print("📰 News updates every 5 minutes")
     print("💹 Price updates every 10 seconds")
@@ -428,7 +428,7 @@ def main():
     except KeyboardInterrupt:
         print("\n🛑 Stopping data feed...")
         feed.stop_feed()
-        print("✅ Data feed stopped.")
+        print(" Data feed stopped.")
 
 if __name__ == "__main__":
     main()

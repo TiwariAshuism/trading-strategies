@@ -151,11 +151,11 @@ def print_config():
     print(f"  Simulations: {CONFIG.MC_SIMULATIONS}")
     print(f"  Days: {CONFIG.MC_DAYS}")
     
-    print(f"\n📊 Weights:")
+    print(f"\n Weights:")
     for component, weight in CONFIG.WEIGHTS.items():
         print(f"  {component}: {weight:.2%}")
     
-    print(f"\n🎯 Signal Thresholds:")
+    print(f"\n Signal Thresholds:")
     for threshold, value in CONFIG.SIGNAL_THRESHOLDS.items():
         print(f"  {threshold}: {value}")
     

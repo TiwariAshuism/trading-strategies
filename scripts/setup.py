@@ -12,7 +12,7 @@ from pathlib import Path
 
 class TradingSystemSetup:
     def __init__(self):
-        self.project_root = Path(__file__).parent
+        self.project_root = Path(__file__).resolve().parent.parent
         self.venv_path = self.project_root / "env"
         
     def check_python_version(self):
@@ -21,10 +21,10 @@ class TradingSystemSetup:
         print(f"🐍 Python version: {version.major}.{version.minor}.{version.micro}")
         
         if version.major < 3 or (version.major == 3 and version.minor < 8):
-            print("❌ Python 3.8 or higher is required")
+            print(" Python 3.8 or higher is required")
             return False
         
-        print("✅ Python version compatible")
+        print(" Python version compatible")
         return True
     
     def setup_virtual_environment(self):
@@ -36,9 +36,9 @@ class TradingSystemSetup:
             try:
                 subprocess.run([sys.executable, "-m", "venv", "env"], 
                              cwd=self.project_root, check=True)
-                print("✅ Virtual environment created")
+                print(" Virtual environment created")
             except subprocess.CalledProcessError as e:
-                print(f"❌ Error creating virtual environment: {e}")
+                print(f" Error creating virtual environment: {e}")
                 return False
         
         return True
@@ -65,7 +65,7 @@ class TradingSystemSetup:
         try:
             subprocess.run([pip_cmd, "install", "--upgrade", "pip"], 
                          check=True, capture_output=True)
-            print("✅ Pip upgraded")
+            print(" Pip upgraded")
         except subprocess.CalledProcessError as e:
             print(f"⚠️ Warning: Could not upgrade pip: {e}")
         
@@ -73,10 +73,10 @@ class TradingSystemSetup:
         try:
             subprocess.run([pip_cmd, "install", "-r", "requirements.txt"], 
                          cwd=self.project_root, check=True)
-            print("✅ Dependencies installed")
+            print(" Dependencies installed")
             return True
         except subprocess.CalledProcessError as e:
-            print(f"❌ Error installing dependencies: {e}")
+            print(f" Error installing dependencies: {e}")
             return False
     
     def run_diagnostic(self):
@@ -93,7 +93,7 @@ class TradingSystemSetup:
                 print("Warnings:", result.stderr)
             return result.returncode == 0
         except Exception as e:
-            print(f"❌ Error running diagnostic: {e}")
+            print(f" Error running diagnostic: {e}")
             return False
     
     def create_activation_script(self):
@@ -103,9 +103,9 @@ class TradingSystemSetup:
             content = f"""@echo off
 cd /d "{self.project_root}"
 call env\\Scripts\\activate.bat
-echo ✅ Trading system environment activated!
+echo  Trading system environment activated!
 echo.
-echo 🎯 Available commands:
+echo  Available commands:
 echo   python trading_control_panel.py --start-all
 echo   python advanced_shortterm_strategy.py  
 echo   streamlit run streamlit_dashboard.py
@@ -118,9 +118,9 @@ cmd /k
             content = f"""#!/bin/bash
 cd "{self.project_root}"
 source env/bin/activate
-echo "✅ Trading system environment activated!"
+echo " Trading system environment activated!"
 echo ""
-echo "🎯 Available commands:"
+echo " Available commands:"
 echo "  python scripts/trading_control_panel.py --start-all"
 echo "  python src/strategies/advanced_shortterm_strategy.py"
 echo "  streamlit run src/ui/streamlit_dashboard.py"
@@ -144,7 +144,7 @@ exec "$SHELL"
         print("""
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║        🚀 TRADING SYSTEM SETUP                            ║
+║         TRADING SYSTEM SETUP                            ║
 ║                                                           ║
 ║    Setting up your advanced algorithmic trading system   ║
 ║                                                           ║
@@ -174,11 +174,11 @@ exec "$SHELL"
         print("="*60)
         
         if diagnostic_ok:
-            print("✅ All systems ready!")
+            print(" All systems ready!")
         else:
             print("⚠️ Setup complete but some issues detected")
         
-        print(f"\n🚀 Quick Start:")
+        print(f"\n Quick Start:")
         if platform.system() == "Windows":
             print(f"   1. Run: {activation_script.name}")
         else:
@@ -198,9 +198,9 @@ def main():
     success = setup.setup()
     
     if success:
-        print("\n🎯 Your advanced trading system is ready to use!")
+        print("\n Your advanced trading system is ready to use!")
     else:
-        print("\n❌ Setup encountered errors. Please check the output above.")
+        print("\n Setup encountered errors. Please check the output above.")
         sys.exit(1)
 
 if __name__ == "__main__":

@@ -75,16 +75,16 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def main():
-    st.markdown('<h1 class="main-header">🚀 Advanced Trading Dashboard</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header"> Advanced Trading Dashboard</h1>', unsafe_allow_html=True)
     
     # Initialize database
     db = init_database()
     
     # Sidebar navigation
-    st.sidebar.title("📊 Navigation")
+    st.sidebar.title(" Navigation")
     page = st.sidebar.selectbox(
         "Select Page",
-        ["🏠 Dashboard", "📈 Live Analysis", "📊 Strategy Performance", 
+        ["🏠 Dashboard", "📈 Live Analysis", " Strategy Performance", 
          "📰 News Sentiment", "🔄 Backtesting", "💼 Portfolio Tracker", "⚙️ Settings"]
     )
     
@@ -92,7 +92,7 @@ def main():
         show_dashboard(db)
     elif page == "📈 Live Analysis":
         show_live_analysis(db)
-    elif page == "📊 Strategy Performance":
+    elif page == " Strategy Performance":
         show_strategy_performance(db)
     elif page == "📰 News Sentiment":
         show_news_sentiment(db)
@@ -105,7 +105,7 @@ def main():
 
 def show_dashboard(db):
     """Main dashboard with overview metrics"""
-    st.header("📊 Trading Dashboard Overview")
+    st.header(" Trading Dashboard Overview")
     
     # Get database stats
     stats = db.get_database_stats()
@@ -115,7 +115,7 @@ def show_dashboard(db):
     
     with col1:
         st.metric(
-            label="🎯 Total Signals",
+            label=" Total Signals",
             value=stats.get('signals_count', 0),
             delta="Active strategies"
         )
@@ -242,7 +242,7 @@ def show_live_analysis(db):
         period = st.selectbox("Analysis Period", ["6mo", "1y", "2y"], index=1)
     
     with col3:
-        if st.button("🚀 Analyze", type="primary"):
+        if st.button(" Analyze", type="primary"):
             st.session_state.analyze_clicked = True
     
     if st.session_state.get('analyze_clicked', False):
@@ -263,7 +263,7 @@ def show_live_analysis(db):
                 
                 with col2:
                     # Signal summary
-                    st.markdown("### 🎯 Trading Signal")
+                    st.markdown("###  Trading Signal")
                     
                     direction_emoji = {"BUY": "🟢", "SELL": "🔴", "HOLD": "🟡"}
                     st.markdown(f"## {direction_emoji.get(signal.direction, '🟡')} {signal.direction}")
@@ -292,11 +292,11 @@ def show_live_analysis(db):
                     # Technical indicators
                     tech_indicators = strategy.signals['technical_indicators']
                     
-                    st.markdown("#### 📊 Technical Indicators")
+                    st.markdown("####  Technical Indicators")
                     st.metric("RSI", f"{tech_indicators['rsi_current']:.1f}")
-                    st.write(f"Golden Cross: {'✅' if tech_indicators['golden_cross'] else '❌'}")
-                    st.write(f"MACD Bullish: {'✅' if tech_indicators['macd_bullish_crossover'] else '❌'}")
-                    st.write(f"High Volume: {'✅' if tech_indicators['high_volume'] else '❌'}")
+                    st.write(f"Golden Cross: {'' if tech_indicators['golden_cross'] else ''}")
+                    st.write(f"MACD Bullish: {'' if tech_indicators['macd_bullish_crossover'] else ''}")
+                    st.write(f"High Volume: {'' if tech_indicators['high_volume'] else ''}")
                 
                 # Reasoning
                 st.subheader("🧠 Analysis Reasoning")
@@ -395,7 +395,7 @@ def create_price_chart(strategy):
 
 def show_strategy_performance(db):
     """Strategy performance comparison page"""
-    st.header("📊 Strategy Performance Analysis")
+    st.header(" Strategy Performance Analysis")
     
     # Strategy selection
     strategies = ['advanced_shortterm', 'portfolio_analyzer', 'news_based']
@@ -461,7 +461,7 @@ def show_news_sentiment(db):
     with col2:
         days = st.slider("Days to Analyze", 1, 30, 7)
     
-    if st.button("📊 Get Sentiment Data"):
+    if st.button(" Get Sentiment Data"):
         sentiment_df = db.get_news_sentiment_history(symbol, days)
         
         if not sentiment_df.empty:
@@ -549,7 +549,7 @@ def show_settings():
     st.header("⚙️ Settings & Configuration")
     
     # Strategy weights
-    st.subheader("🎯 Strategy Component Weights")
+    st.subheader(" Strategy Component Weights")
     
     col1, col2 = st.columns(2)
     
@@ -567,7 +567,7 @@ def show_settings():
     if abs(total_weight - 1.0) > 0.01:
         st.warning(f"⚠️ Weights sum to {total_weight:.2f}. They should sum to 1.0")
     else:
-        st.success("✅ Weights are properly balanced")
+        st.success(" Weights are properly balanced")
     
     if st.button("💾 Save Configuration"):
         # Update configuration (this would save to config file)
@@ -579,7 +579,7 @@ def show_settings():
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        if st.button("📊 Database Stats"):
+        if st.button(" Database Stats"):
             db = init_database()
             stats = db.get_database_stats()
             st.json(stats)

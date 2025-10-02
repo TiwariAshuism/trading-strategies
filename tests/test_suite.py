@@ -405,17 +405,17 @@ def run_performance_benchmark():
         end_time = time.time()
         
         analysis_time = end_time - start_time
-        print(f"📊 Strategy Analysis Time: {analysis_time:.2f} seconds")
+        print(f" Strategy Analysis Time: {analysis_time:.2f} seconds")
         
         if analysis_time < 30:
-            print("   ✅ Performance: Good")
+            print("    Performance: Good")
         elif analysis_time < 60:
             print("   ⚠️ Performance: Acceptable")
         else:
-            print("   ❌ Performance: Slow")
+            print("    Performance: Slow")
     
     except Exception as e:
-        print(f"   ❌ Benchmark failed: {e}")
+        print(f"    Benchmark failed: {e}")
     
     # Test database operations speed
     try:
@@ -450,7 +450,7 @@ def run_performance_benchmark():
         os.remove(db_path)
         
     except Exception as e:
-        print(f"   ❌ Database benchmark failed: {e}")
+        print(f"    Database benchmark failed: {e}")
 
 def main():
     """Run comprehensive test suite"""
@@ -499,7 +499,7 @@ def main():
     print(f"Skipped: {len(result.skipped)}")
     
     if result.failures:
-        print(f"\n❌ Failures:")
+        print(f"\n Failures:")
         for test, traceback in result.failures:
             print(f"  • {test}: {traceback.split(chr(10))[-2]}")
     
@@ -513,7 +513,7 @@ def main():
     
     # Overall result
     if len(result.failures) == 0 and len(result.errors) == 0:
-        print(f"\n✅ All tests passed! System is ready for use.")
+        print(f"\n All tests passed! System is ready for use.")
     else:
         print(f"\n⚠️ Some tests failed. Please review before using the system.")
     

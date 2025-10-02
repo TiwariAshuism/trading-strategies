@@ -23,6 +23,27 @@ from typing import Dict, List, Tuple, Optional
 import logging
 from dataclasses import dataclass
 from enum import Enum
+import sys
+from pathlib import Path
+
+# Add project root to path for emoji handler
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+# Import emoji handler
+try:
+    from src.utils.emoji_handler import safe_print, format_text
+except ImportError:
+    # Fallback functions
+    def safe_print(text, end='\n', flush=False):
+        try:
+            print(text, end=end, flush=flush)
+        except UnicodeEncodeError:
+            text = str(text).replace("", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]").replace("", "[CHART]").replace("", "[TARGET]")
+            print(text, end=end, flush=flush)
+    
+    def format_text(text):
+        return text
 
 # SSL bypass for data fetching
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -516,28 +537,28 @@ class AdvancedShortTermStrategy:
     def print_detailed_analysis(self):
         """Print comprehensive analysis report"""
         if self.final_signal is None:
-            print("❌ No analysis available. Run generate_multi_factor_signal() first.")
+            safe_print(" No analysis available. Run generate_multi_factor_signal() first.")
             return
         
         signal = self.final_signal
         current_price = self.data['Close'].iloc[-1]
         
-        print("\n" + "="*80)
-        print(f"🚀 ADVANCED SHORT-TERM STRATEGY ANALYSIS: {self.symbol}")
-        print("="*80)
+        safe_print("\n" + "="*80)
+        safe_print(f" ADVANCED SHORT-TERM STRATEGY ANALYSIS: {self.symbol}")
+        safe_print("="*80)
         
         # Signal Summary
-        print(f"\n📊 TRADING SIGNAL SUMMARY")
-        print("-" * 40)
-        print(f"Direction: {signal.direction} ({signal.strength.name})")
-        print(f"Confidence: {signal.confidence:.1f}%")
-        print(f"Current Price: ₹{current_price:.2f}")
-        print(f"Entry Price: ₹{signal.entry_price:.2f}")
-        print(f"Stop Loss: ₹{signal.stop_loss:.2f}")
-        print(f"Take Profit: ₹{signal.take_profit:.2f}")
-        print(f"Risk/Reward Ratio: 1:{signal.risk_reward_ratio:.2f}")
-        print(f"Expected Return: {signal.expected_return:.2%}")
-        print(f"Time Horizon: {signal.time_horizon}")
+        safe_print(f"\n TRADING SIGNAL SUMMARY")
+        safe_print("-" * 40)
+        safe_print(f"Direction: {signal.direction} ({signal.strength.name})")
+        safe_print(f"Confidence: {signal.confidence:.1f}%")
+        safe_print(f"Current Price: ₹{current_price:.2f}")
+        safe_print(f"Entry Price: ₹{signal.entry_price:.2f}")
+        safe_print(f"Stop Loss: ₹{signal.stop_loss:.2f}")
+        safe_print(f"Take Profit: ₹{signal.take_profit:.2f}")
+        safe_print(f"Risk/Reward Ratio: 1:{signal.risk_reward_ratio:.2f}")
+        safe_print(f"Expected Return: {signal.expected_return:.2%}")
+        safe_print(f"Time Horizon: {signal.time_horizon}")
         
         # Monte Carlo Results
         mc_results = self.signals['monte_carlo_results']
@@ -553,11 +574,11 @@ class AdvancedShortTermStrategy:
         print(f"\n📈 TECHNICAL ANALYSIS")
         print("-" * 40)
         print(f"RSI: {tech_indicators['rsi_current']:.1f} ({'Oversold' if tech_indicators['rsi_oversold'] else 'Overbought' if tech_indicators['rsi_overbought'] else 'Normal'})")
-        print(f"Golden Cross: {'✅' if tech_indicators['golden_cross'] else '❌'}")
-        print(f"Death Cross: {'⚠️' if tech_indicators['death_cross'] else '✅'}")
-        print(f"MACD Bullish: {'✅' if tech_indicators['macd_bullish_crossover'] else '❌'}")
+        print(f"Golden Cross: {'' if tech_indicators['golden_cross'] else ''}")
+        print(f"Death Cross: {'⚠️' if tech_indicators['death_cross'] else ''}")
+        print(f"MACD Bullish: {'' if tech_indicators['macd_bullish_crossover'] else ''}")
         print(f"BB Breakout: {'📈 Up' if tech_indicators['bb_breakout_up'] else '📉 Down' if tech_indicators['bb_breakout_down'] else '➡️ None'}")
-        print(f"High Volume: {'✅' if tech_indicators['high_volume'] else '❌'}")
+        print(f"High Volume: {'' if tech_indicators['high_volume'] else ''}")
         
         # Candlestick Patterns
         patterns = self.signals['candlestick_patterns']
@@ -620,7 +641,7 @@ class AdvancedShortTermStrategy:
     def plot_analysis_charts(self):
         """Create comprehensive analysis charts"""
         if self.data is None or self.final_signal is None:
-            print("❌ No data available for plotting")
+            print(" No data available for plotting")
             return
         
         fig, axes = plt.subplots(2, 2, figsize=(16, 12))
@@ -691,7 +712,7 @@ class AdvancedShortTermStrategy:
 
 def main():
     """Test the Advanced Short-Term Strategy"""
-    print("🚀 Advanced Short-Term Trading Strategy")
+    print(" Advanced Short-Term Trading Strategy")
     print("=" * 50)
     
     # Example usage
@@ -726,7 +747,7 @@ def main():
         strategy.print_detailed_analysis()
         
         # Plot charts
-        print("\n📊 Generating analysis charts...")
+        print("\n Generating analysis charts...")
         strategy.plot_analysis_charts()
         
         # Save results
@@ -750,7 +771,7 @@ def main():
         
     except Exception as e:
         logger.error(f"Error in analysis: {e}")
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
 
 if __name__ == "__main__":
     main()
