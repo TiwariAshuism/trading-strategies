@@ -25,7 +25,7 @@ trading-strategies/
 └── 📁 env/                   # Python virtual environment
 ```
 
-## 🎯 Detailed Module Structure
+##  Detailed Module Structure
 
 ### 📊 src/strategies/ - Trading Strategies
 ```
@@ -147,7 +147,7 @@ from src.config.strategy_config import CONFIG
 - **Better error handling** with organized imports
 - **Professional appearance** for sharing/collaboration
 
-## 🎯 Development Workflow
+##  Development Workflow
 
 1. **Setup**: Run `python main.py --setup` or `python scripts/setup.py`
 2. **Development**: Work within the organized `src/` modules

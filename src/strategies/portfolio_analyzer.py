@@ -1445,7 +1445,7 @@ def print_detailed_report(results: List[Dict], summary: Dict):
     print(f"{'High Risk Positions:':<30} {summary.get('risk_level_score', 0):>15.1f}%")
     
     # Diversification Analysis
-    print(f"\n{'🎯 DIVERSIFICATION ANALYSIS':<50}")
+    print(f"\n{' DIVERSIFICATION ANALYSIS':<50}")
     print(f"{'─'*50}")
     print(f"{'Number of Holdings:':<30} {summary['n_stocks']:>15}")
     print(f"{'Diversification Score:':<30} {summary['diversification_score']:>15.1f}/100")
@@ -1510,7 +1510,7 @@ def print_detailed_report(results: List[Dict], summary: Dict):
         
         # Advanced Price Targets
         target = r.get('target', {})
-        print(f"\n{'🎯 Price Targets (3-month):'}:")
+        print(f"\n{' Price Targets (3-month):'}:")
         print(f"  • Conservative: ₹{target.get('conservative_target', 0):.2f} ({target.get('conservative_return', 0):+.2f}%)")
         print(f"  • Average: ₹{target.get('avg_target', 0):.2f} ({target.get('expected_return', 0):+.2f}%)")
         print(f"  • Aggressive: ₹{target.get('aggressive_target', 0):.2f} ({target.get('aggressive_return', 0):+.2f}%)")
@@ -1615,7 +1615,7 @@ def print_detailed_report(results: List[Dict], summary: Dict):
             else:
                 print(f"\n📊 For {r['ticker']}: No specific alternatives found. Consider diversifying into IT, Banking, or FMCG sectors.")
     # Portfolio Recommendations
-    print(f"\n{'🎯 PORTFOLIO OPTIMIZATION SUGGESTIONS:'}")
+    print(f"\n{' PORTFOLIO OPTIMIZATION SUGGESTIONS:'}")
     print(f"{'─'*50}")
     
     if summary.get('diversification_score', 0) < 50:

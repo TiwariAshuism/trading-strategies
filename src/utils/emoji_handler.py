@@ -31,7 +31,7 @@ class EmojiHandler:
         
         # Trading specific emojis
         '📋': '[LIST]',
-        '🎯': '[TARGET]',
+        '': '[TARGET]',
         '⚡': '[FAST]',
         '🔄': '[REFRESH]',
         '🎪': '[ANALYSIS]',
@@ -200,7 +200,7 @@ def test_emoji_handling():
         " All tests passed!",
         " Error occurred",
         "📊 Portfolio Analysis",
-        "🎯 Trading Signals",
+        " Trading Signals",
         "💰 Profit: $1000",
         "⚠️ Warning: High volatility"
     ]

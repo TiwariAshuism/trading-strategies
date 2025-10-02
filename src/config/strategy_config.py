@@ -155,7 +155,7 @@ def print_config():
     for component, weight in CONFIG.WEIGHTS.items():
         print(f"  {component}: {weight:.2%}")
     
-    print(f"\n🎯 Signal Thresholds:")
+    print(f"\n Signal Thresholds:")
     for threshold, value in CONFIG.SIGNAL_THRESHOLDS.items():
         print(f"  {threshold}: {value}")
     

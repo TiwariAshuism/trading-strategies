@@ -115,7 +115,7 @@ def show_dashboard(db):
     
     with col1:
         st.metric(
-            label="🎯 Total Signals",
+            label=" Total Signals",
             value=stats.get('signals_count', 0),
             delta="Active strategies"
         )
@@ -263,7 +263,7 @@ def show_live_analysis(db):
                 
                 with col2:
                     # Signal summary
-                    st.markdown("### 🎯 Trading Signal")
+                    st.markdown("###  Trading Signal")
                     
                     direction_emoji = {"BUY": "🟢", "SELL": "🔴", "HOLD": "🟡"}
                     st.markdown(f"## {direction_emoji.get(signal.direction, '🟡')} {signal.direction}")
@@ -549,7 +549,7 @@ def show_settings():
     st.header("⚙️ Settings & Configuration")
     
     # Strategy weights
-    st.subheader("🎯 Strategy Component Weights")
+    st.subheader(" Strategy Component Weights")
     
     col1, col2 = st.columns(2)
     

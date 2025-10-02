@@ -105,7 +105,7 @@ cd /d "{self.project_root}"
 call env\\Scripts\\activate.bat
 echo  Trading system environment activated!
 echo.
-echo 🎯 Available commands:
+echo  Available commands:
 echo   python trading_control_panel.py --start-all
 echo   python advanced_shortterm_strategy.py  
 echo   streamlit run streamlit_dashboard.py
@@ -120,7 +120,7 @@ cd "{self.project_root}"
 source env/bin/activate
 echo " Trading system environment activated!"
 echo ""
-echo "🎯 Available commands:"
+echo " Available commands:"
 echo "  python scripts/trading_control_panel.py --start-all"
 echo "  python src/strategies/advanced_shortterm_strategy.py"
 echo "  streamlit run src/ui/streamlit_dashboard.py"
@@ -198,7 +198,7 @@ def main():
     success = setup.setup()
     
     if success:
-        print("\n🎯 Your advanced trading system is ready to use!")
+        print("\n Your advanced trading system is ready to use!")
     else:
         print("\n Setup encountered errors. Please check the output above.")
         sys.exit(1)

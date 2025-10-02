@@ -463,7 +463,7 @@ def main():
     start_date = "2023-01-01"
     end_date = "2024-12-31"
     
-    print("\n🎯 Backtest Options:")
+    print("\n Backtest Options:")
     print("1. Single Symbol Detailed Backtest")
     print("2. Multi-Symbol Comparison")
     print("3. Parameter Optimization")

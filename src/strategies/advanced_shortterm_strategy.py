@@ -39,7 +39,7 @@ except ImportError:
         try:
             print(text, end=end, flush=flush)
         except UnicodeEncodeError:
-            text = str(text).replace("🚀", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]").replace("📊", "[CHART]").replace("🎯", "[TARGET]")
+            text = str(text).replace("🚀", "[LAUNCH]").replace("", "[OK]").replace("", "[ERROR]").replace("📊", "[CHART]").replace("", "[TARGET]")
             print(text, end=end, flush=flush)
     
     def format_text(text):

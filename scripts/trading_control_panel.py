@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Master Control Panel for Advanced Trading System
-Centralized launcher and coordinator for        print(f"🎯 System Status:")
+Centralized launcher and coordinator for        print(f" System Status:")
         print(f"   🌐 Web Dashboard: http://localhost:8501")
         print(f"   📡 Data Feed: Running (simple mode)")
         print(f"   💾 Database: trading_data.db") trading components.
@@ -136,7 +136,7 @@ class TradingSystemController:
         else:
             print("    Dashboard failed to start")
         
-        print("\n🎯 System Status:")
+        print("\n System Status:")
         print(f"   🌐 Web Dashboard: http://localhost:8501")
         print(f"   📡 Data Feed: ws://localhost:8765")
         print(f"   💾 Database: trading_data.db")
@@ -255,7 +255,7 @@ def main():
     ║        🚀 ADVANCED TRADING SYSTEM CONTROL PANEL          ║
     ║                                                           ║
     ║    📊 Portfolio Analysis  📰 News Sentiment Analysis     ║
-    ║    🎯 Multi-Strategy      ⚡ Short-Term Signals          ║
+    ║     Multi-Strategy      ⚡ Short-Term Signals          ║
     ║    🌐 Web Dashboard       📡 Real-Time Data              ║
     ║    🤖 Auto Trading        💾 Data Persistence           ║
     ║                                                           ║
@@ -293,7 +293,7 @@ def main():
         
         else:
             # Interactive mode
-            print("🎯 Interactive Mode")
+            print(" Interactive Mode")
             print("Available commands:")
             print("  1. Start full system")
             print("  2. Quick analysis")

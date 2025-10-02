@@ -1513,7 +1513,7 @@ def main():
               f"{len(result['news_articles']):<10}{result['overall_sentiment']:<12}")
     
     # Detailed analysis for top 3
-    print(f"\n{'🎯 DETAILED ANALYSIS - TOP 3 OPPORTUNITIES':^100}")
+    print(f"\n{' DETAILED ANALYSIS - TOP 3 OPPORTUNITIES':^100}")
     print("="*100)
     
     for i, result in enumerate(results[:3], 1):
@@ -1606,7 +1606,7 @@ def main():
         print(f"  ⚖️  Neutral sentiment - Mixed market behavior")
     
     if best['market_regime'] == 'Trending':
-        print(f"  🎯 Trending market - Momentum strategies favored")
+        print(f"   Trending market - Momentum strategies favored")
     elif best['market_regime'] == 'Ranging':
         print(f"  🔄 Ranging market - Mean reversion strategies favored")
     else:
