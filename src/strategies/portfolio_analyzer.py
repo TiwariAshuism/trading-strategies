@@ -344,7 +344,7 @@ def fetch_stock_data(ticker: str, period: str = "2y") -> pd.DataFrame:
     
     while retry_count < max_retries:
         try:
-            df = yf.download(ticker, period=period, progress=False, auto_adjust=True, verify=False)
+            df = yf.download(ticker, period=period, progress=False, auto_adjust=True)
             if df.empty:
                 logger.warning(f"No data returned for {ticker}")
                 return pd.DataFrame()
@@ -396,7 +396,7 @@ def get_current_price(ticker: str) -> float:
     while retry_count < max_retries:
         try:
             stock = yf.Ticker(ticker)
-            data = stock.history(period="5d", verify=False)  # Get more data for reliability
+            data = stock.history(period="5d")  # Get more data for reliability
             if not data.empty:
                 # Use the most recent valid price
                 valid_prices = data['Close'].dropna()
