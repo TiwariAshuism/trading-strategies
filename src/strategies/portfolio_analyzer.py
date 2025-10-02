@@ -1046,6 +1046,127 @@ def recommendation_engine(stock_data: Dict, holding_months: int) -> Dict:
             'reasons': ['Analysis incomplete due to data issues']
         }
 
+
+def get_alternative_stock_recommendations(sell_stock: Dict, portfolio: List[Dict]) -> List[Dict]:
+    """
+    Generate alternative stock recommendations for positions marked for sell/exit.
+    Considers sector diversification, risk profile, and market conditions.
+    """
+    try:
+        ticker = sell_stock['ticker']
+        current_value = sell_stock['current_value']
+        
+        # Define sector-wise alternatives (Indian market focus)
+        stock_alternatives = {
+            # Automotive & Auto Components
+            'TATAMOTORS.NS': [
+                {'symbol': 'MARUTI.NS', 'name': 'Maruti Suzuki', 'sector': 'Automotive', 'risk': 'Medium'},
+                {'symbol': 'M&M.NS', 'name': 'Mahindra & Mahindra', 'sector': 'Automotive', 'risk': 'Medium'},
+                {'symbol': 'BAJAJ-AUTO.NS', 'name': 'Bajaj Auto', 'sector': 'Automotive', 'risk': 'Low'},
+                {'symbol': 'HEROMOTOCO.NS', 'name': 'Hero MotoCorp', 'sector': 'Automotive', 'risk': 'Low'},
+                {'symbol': 'EICHERMOT.NS', 'name': 'Eicher Motors', 'sector': 'Automotive', 'risk': 'Medium'}
+            ],
+            
+            # FMCG & Consumer
+            'ITC.NS': [
+                {'symbol': 'HINDUNILVR.NS', 'name': 'Hindustan Unilever', 'sector': 'FMCG', 'risk': 'Low'},
+                {'symbol': 'NESTLEIND.NS', 'name': 'Nestle India', 'sector': 'FMCG', 'risk': 'Low'},
+                {'symbol': 'BRITANNIA.NS', 'name': 'Britannia Industries', 'sector': 'FMCG', 'risk': 'Low'},
+                {'symbol': 'DABUR.NS', 'name': 'Dabur India', 'sector': 'FMCG', 'risk': 'Low'},
+                {'symbol': 'MARICO.NS', 'name': 'Marico Limited', 'sector': 'FMCG', 'risk': 'Medium'}
+            ],
+            
+            # Chemicals
+            'TATACHEM.NS': [
+                {'symbol': 'RELIANCE.NS', 'name': 'Reliance Industries', 'sector': 'Chemicals/Energy', 'risk': 'Medium'},
+                {'symbol': 'UPL.NS', 'name': 'UPL Limited', 'sector': 'Chemicals', 'risk': 'High'},
+                {'symbol': 'PIDILITIND.NS', 'name': 'Pidilite Industries', 'sector': 'Chemicals', 'risk': 'Low'},
+                {'symbol': 'AAVAS.NS', 'name': 'Aavas Financiers', 'sector': 'Specialty Chemicals', 'risk': 'Medium'},
+                {'symbol': 'DEEPAKNTR.NS', 'name': 'Deepak Nitrite', 'sector': 'Chemicals', 'risk': 'High'}
+            ],
+            
+            # Renewable Energy & Solar
+            'ACMESOLAR.NS': [
+                {'symbol': 'ADANIGREEN.NS', 'name': 'Adani Green Energy', 'sector': 'Renewable Energy', 'risk': 'High'},
+                {'symbol': 'SUZLON.NS', 'name': 'Suzlon Energy', 'sector': 'Renewable Energy', 'risk': 'High'},
+                {'symbol': 'TATAPOWER.NS', 'name': 'Tata Power', 'sector': 'Power/Renewable', 'risk': 'Medium'},
+                {'symbol': 'NTPC.NS', 'name': 'NTPC Limited', 'sector': 'Power', 'risk': 'Low'},
+                {'symbol': 'POWERGRID.NS', 'name': 'Power Grid Corp', 'sector': 'Power Infrastructure', 'risk': 'Low'}
+            ],
+            
+            # Logistics & Transportation
+            'CONTAINERCORP.NS': [
+                {'symbol': 'CONCOR.NS', 'name': 'Container Corporation', 'sector': 'Logistics', 'risk': 'Medium'},
+                {'symbol': 'BLUEDART.NS', 'name': 'Blue Dart Express', 'sector': 'Logistics', 'risk': 'Medium'},
+                {'symbol': 'VRL.NS', 'name': 'VRL Logistics', 'sector': 'Logistics', 'risk': 'Medium'},
+                {'symbol': 'TCI.NS', 'name': 'Transport Corp of India', 'sector': 'Logistics', 'risk': 'Medium'},
+                {'symbol': 'MAHLOG.NS', 'name': 'Mahindra Logistics', 'sector': 'Logistics', 'risk': 'High'}
+            ]
+        }
+        
+        # Generic high-quality alternatives if specific stock not found
+        generic_alternatives = [
+            {'symbol': 'RELIANCE.NS', 'name': 'Reliance Industries', 'sector': 'Diversified', 'risk': 'Medium'},
+            {'symbol': 'TCS.NS', 'name': 'Tata Consultancy Services', 'sector': 'IT Services', 'risk': 'Low'},
+            {'symbol': 'INFY.NS', 'name': 'Infosys', 'sector': 'IT Services', 'risk': 'Low'},
+            {'symbol': 'HDFCBANK.NS', 'name': 'HDFC Bank', 'sector': 'Banking', 'risk': 'Low'},
+            {'symbol': 'ICICIBANK.NS', 'name': 'ICICI Bank', 'sector': 'Banking', 'risk': 'Low'},
+            {'symbol': 'HINDUNILVR.NS', 'name': 'Hindustan Unilever', 'sector': 'FMCG', 'risk': 'Low'},
+            {'symbol': 'BAJFINANCE.NS', 'name': 'Bajaj Finance', 'sector': 'NBFC', 'risk': 'Medium'},
+            {'symbol': 'ASIANPAINT.NS', 'name': 'Asian Paints', 'sector': 'Paints', 'risk': 'Low'},
+            {'symbol': 'TITAN.NS', 'name': 'Titan Company', 'sector': 'Consumer Discretionary', 'risk': 'Medium'},
+            {'symbol': 'WIPRO.NS', 'name': 'Wipro', 'sector': 'IT Services', 'risk': 'Low'},
+            {'symbol': 'LT.NS', 'name': 'Larsen & Toubro', 'sector': 'Engineering', 'risk': 'Medium'},
+            {'symbol': 'SUNPHARMA.NS', 'name': 'Sun Pharmaceutical', 'sector': 'Pharmaceuticals', 'risk': 'Medium'}
+        ]
+        
+        # Get alternatives for the specific stock or use generic ones
+        alternatives = stock_alternatives.get(ticker, generic_alternatives)
+        
+        # Get current portfolio tickers to avoid duplicates
+        current_tickers = [stock['ticker'] for stock in portfolio]
+        
+        # Filter out stocks already in portfolio
+        filtered_alternatives = [alt for alt in alternatives if alt['symbol'] not in current_tickers]
+        
+        # Calculate investment allocation suggestion
+        recommendations = []
+        
+        for i, alt in enumerate(filtered_alternatives[:5]):  # Top 5 alternatives
+            try:
+                # Get basic info for the alternative stock
+                current_price = get_current_price(alt['symbol'])
+                if current_price > 0:
+                    # Calculate suggested allocation (distribute current value)
+                    suggested_allocation = current_value * (0.4 if i == 0 else 0.15)  # 40% to top choice, 15% each to others
+                    suggested_shares = int(suggested_allocation / current_price)
+                    
+                    # Risk-based allocation adjustment
+                    risk_multiplier = {'Low': 1.2, 'Medium': 1.0, 'High': 0.8}
+                    adjusted_allocation = suggested_allocation * risk_multiplier.get(alt['risk'], 1.0)
+                    adjusted_shares = int(adjusted_allocation / current_price)
+                    
+                    recommendations.append({
+                        'symbol': alt['symbol'],
+                        'name': alt['name'],
+                        'sector': alt['sector'],
+                        'risk_level': alt['risk'],
+                        'current_price': current_price,
+                        'suggested_allocation': adjusted_allocation,
+                        'suggested_shares': adjusted_shares,
+                        'priority': i + 1,
+                        'rationale': f"Sector diversification from {alt['sector']}, {alt['risk'].lower()} risk profile"
+                    })
+                
+            except Exception as e:
+                logger.warning(f"Could not fetch data for alternative {alt['symbol']}: {e}")
+                continue
+        
+        return recommendations
+        
+    except Exception as e:
+        logger.error(f"Error generating alternative recommendations: {e}")
+        return []
 # ==================== PORTFOLIO ANALYSIS ====================
 
 def analyze_holding(holding: Dict) -> Dict:
@@ -1472,7 +1593,27 @@ def print_detailed_report(results: List[Dict], summary: Dict):
             target = r.get('target', {})
             rec = r.get('recommendation', {})
             print(f"   • {r['ticker']:<15} Risk: {target.get('expected_return', 0):.1f}%, Current: {r['current_return']:+.1f}% | Confidence: {rec.get('confidence', 'N/A')}")
-    
+        # Generate alternative stock recommendations for sell positions
+        print(f"\n{'🔄 ALTERNATIVE STOCK RECOMMENDATIONS FOR SELL/EXIT POSITIONS:'}")
+        print(f"{'─'*80}")
+        
+        for r in sells:
+            alternatives = get_alternative_stock_recommendations(r, results)
+            if alternatives:
+                print(f"\n📊 For {r['ticker']} (₹{r['current_value']:,.0f} to reallocate):")
+                print(f"   {'Stock':<20} {'Sector':<20} {'Risk':<8} {'Price':<10} {'Allocation':<12} {'Shares'}")
+                print(f"   {'-'*75}")
+                
+                for alt in alternatives:
+                    print(f"   {alt['name'][:19]:<20} {alt['sector'][:19]:<20} {alt['risk_level']:<8} "
+                          f"₹{alt['current_price']:<9.2f} ₹{alt['suggested_allocation']:<11,.0f} {alt['suggested_shares']}")
+                
+                # Show rationale for top recommendation
+                if alternatives:
+                    top_alt = alternatives[0]
+                    print(f"   💡 Top Choice: {top_alt['name']} - {top_alt['rationale']}")
+            else:
+                print(f"\n📊 For {r['ticker']}: No specific alternatives found. Consider diversifying into IT, Banking, or FMCG sectors.")
     # Portfolio Recommendations
     print(f"\n{'🎯 PORTFOLIO OPTIMIZATION SUGGESTIONS:'}")
     print(f"{'─'*50}")
