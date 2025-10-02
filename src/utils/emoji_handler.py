@@ -13,14 +13,14 @@ class EmojiHandler:
     # Emoji mappings to ASCII alternatives
     EMOJI_MAP = {
         # System and status emojis
-        '': '[LAUNCH]',
-        '': '[OK]',
+        '🚀': '[LAUNCH]',
+        '✅': '[OK]',
         '': '[ERROR]',
         '⚠️': '[WARNING]',
         '💡': '[TIP]',
         '🔧': '[TOOL]',
         '🔍': '[INFO]',
-        '': '[CHART]',
+        '📊': '[CHART]',
         '📈': '[UP]',
         '📉': '[DOWN]',
         '💰': '[MONEY]',
@@ -31,7 +31,7 @@ class EmojiHandler:
         
         # Trading specific emojis
         '📋': '[LIST]',
-        '': '[TARGET]',
+        '🎯': '[TARGET]',
         '⚡': '[FAST]',
         '🔄': '[REFRESH]',
         '🎪': '[ANALYSIS]',
@@ -107,7 +107,7 @@ class EmojiHandler:
         '📏': '[MEASURE]',
         '📐': '[CALCULATE]',
         '🧮': '[COMPUTE]',
-        '': '[STATS]',
+        '📊': '[STATS]',
         '📈': '[GROWTH]',
         '📉': '[DECLINE]',
         
@@ -140,7 +140,7 @@ class EmojiHandler:
                 return True
             
             # Test print
-            test_emoji = ''
+            test_emoji = '✅'
             sys.stdout.write(test_emoji)
             sys.stdout.flush()
             return True
@@ -196,11 +196,11 @@ def replace_emojis(text):
 def test_emoji_handling():
     """Test emoji handling capabilities"""
     test_texts = [
-        " System starting...",
-        " All tests passed!",
+        "🚀 System starting...",
+        "✅ All tests passed!",
         " Error occurred",
-        " Portfolio Analysis",
-        " Trading Signals",
+        "📊 Portfolio Analysis",
+        "🎯 Trading Signals",
         "💰 Profit: $1000",
         "⚠️ Warning: High volatility"
     ]

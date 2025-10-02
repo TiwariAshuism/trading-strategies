@@ -297,7 +297,7 @@ class StrategyBacktester:
         result = self.results
         
         print("\n" + "="*80)
-        print(f" BACKTEST RESULTS: {result.symbol}")
+        print(f"📊 BACKTEST RESULTS: {result.symbol}")
         print("="*80)
         
         # Performance Summary
@@ -413,7 +413,7 @@ def run_multi_symbol_backtest(symbols: List[str], start_date: str, end_date: str
     
     for symbol in symbols:
         try:
-            print(f"\n Backtesting {symbol}...")
+            print(f"\n📊 Backtesting {symbol}...")
             backtester = StrategyBacktester(symbol, start_date, end_date)
             result = backtester.run_backtest()
             
@@ -455,7 +455,7 @@ def run_multi_symbol_backtest(symbols: List[str], start_date: str, end_date: str
 
 def main():
     """Main backtesting function"""
-    print(" Advanced Short-Term Strategy Backtester")
+    print("📊 Advanced Short-Term Strategy Backtester")
     print("="*50)
     
     # Configuration
@@ -463,7 +463,7 @@ def main():
     start_date = "2023-01-01"
     end_date = "2024-12-31"
     
-    print("\n Backtest Options:")
+    print("\n🎯 Backtest Options:")
     print("1. Single Symbol Detailed Backtest")
     print("2. Multi-Symbol Comparison")
     print("3. Parameter Optimization")

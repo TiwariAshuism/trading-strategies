@@ -1324,7 +1324,7 @@ def print_detailed_report(results: List[Dict], summary: Dict):
     print(f"{'High Risk Positions:':<30} {summary.get('risk_level_score', 0):>15.1f}%")
     
     # Diversification Analysis
-    print(f"\n{' DIVERSIFICATION ANALYSIS':<50}")
+    print(f"\n{'🎯 DIVERSIFICATION ANALYSIS':<50}")
     print(f"{'─'*50}")
     print(f"{'Number of Holdings:':<30} {summary['n_stocks']:>15}")
     print(f"{'Diversification Score:':<30} {summary['diversification_score']:>15.1f}/100")
@@ -1334,7 +1334,7 @@ def print_detailed_report(results: List[Dict], summary: Dict):
     print(f"{'Risk Clusters:':<30} {summary.get('risk_clusters', 1):>15}")
     
     # Performance Distribution
-    print(f"\n{' PERFORMANCE DISTRIBUTION':<50}")
+    print(f"\n{'📊 PERFORMANCE DISTRIBUTION':<50}")
     print(f"{'─'*50}")
     print(f"{'Winners:':<30} {summary.get('winners', 0):>15} stocks")
     print(f"{'Losers:':<30} {summary.get('losers', 0):>15} stocks")
@@ -1356,7 +1356,7 @@ def print_detailed_report(results: List[Dict], summary: Dict):
     for r in results:
         print(f"\n{'─'*100}")
         rec = r.get('recommendation', {})
-        print(f" {r['ticker']} - {rec.get('action', 'N/A')} | Risk: {rec.get('risk_level', 'N/A')} | Score: {rec.get('score', 0)}")
+        print(f"📊 {r['ticker']} - {rec.get('action', 'N/A')} | Risk: {rec.get('risk_level', 'N/A')} | Score: {rec.get('score', 0)}")
         print(f"{'─'*100}")
         
         # Basic Position Info
@@ -1389,7 +1389,7 @@ def print_detailed_report(results: List[Dict], summary: Dict):
         
         # Advanced Price Targets
         target = r.get('target', {})
-        print(f"\n{' Price Targets (3-month):'}:")
+        print(f"\n{'🎯 Price Targets (3-month):'}:")
         print(f"  • Conservative: ₹{target.get('conservative_target', 0):.2f} ({target.get('conservative_return', 0):+.2f}%)")
         print(f"  • Average: ₹{target.get('avg_target', 0):.2f} ({target.get('expected_return', 0):+.2f}%)")
         print(f"  • Aggressive: ₹{target.get('aggressive_target', 0):.2f} ({target.get('aggressive_return', 0):+.2f}%)")
@@ -1474,7 +1474,7 @@ def print_detailed_report(results: List[Dict], summary: Dict):
             print(f"   • {r['ticker']:<15} Risk: {target.get('expected_return', 0):.1f}%, Current: {r['current_return']:+.1f}% | Confidence: {rec.get('confidence', 'N/A')}")
     
     # Portfolio Recommendations
-    print(f"\n{' PORTFOLIO OPTIMIZATION SUGGESTIONS:'}")
+    print(f"\n{'🎯 PORTFOLIO OPTIMIZATION SUGGESTIONS:'}")
     print(f"{'─'*50}")
     
     if summary.get('diversification_score', 0) < 50:

@@ -159,7 +159,7 @@ class NewsAnalyzer:
             time.sleep(1)  # Be respectful to news sources
         
         self.news_cache = all_news
-        print(f" Total articles fetched: {len(all_news)}")
+        print(f"📊 Total articles fetched: {len(all_news)}")
         return all_news
     
     def analyze_sentiment(self, text: str) -> Dict:
@@ -1453,7 +1453,7 @@ def main():
         print(f"{sentiment_emoji} {topic['topic'].upper():<20} | Frequency: {topic['frequency']:<3} | Sentiment: {topic['avg_sentiment']:+.2f}")
     
     # Display sector momentum
-    print(f"\n{' SECTOR MOMENTUM':^100}")
+    print(f"\n{'📊 SECTOR MOMENTUM':^100}")
     print("="*100)
     for sector, data in sorted(sector_momentum.items(), key=lambda x: x[1]['score'], reverse=True):
         sentiment_emoji = "🟢" if data['sentiment_label'] == 'positive' else "🔴" if data['sentiment_label'] == 'negative' else "🟡"
@@ -1502,7 +1502,7 @@ def main():
     results.sort(key=lambda x: x['news_score'], reverse=True)
     
     # Display results
-    print(f"\n{' TOP NEWS-DRIVEN OPPORTUNITIES':^100}")
+    print(f"\n{'📊 TOP NEWS-DRIVEN OPPORTUNITIES':^100}")
     print("="*100)
     print(f"{'Rank':<5}{'Ticker':<15}{'Price':<10}{'News Score':<12}{'Signal':<12}{'Articles':<10}{'Sentiment':<12}")
     print("-"*100)
@@ -1513,7 +1513,7 @@ def main():
               f"{len(result['news_articles']):<10}{result['overall_sentiment']:<12}")
     
     # Detailed analysis for top 3
-    print(f"\n{' DETAILED ANALYSIS - TOP 3 OPPORTUNITIES':^100}")
+    print(f"\n{'🎯 DETAILED ANALYSIS - TOP 3 OPPORTUNITIES':^100}")
     print("="*100)
     
     for i, result in enumerate(results[:3], 1):
@@ -1606,7 +1606,7 @@ def main():
         print(f"  ⚖️  Neutral sentiment - Mixed market behavior")
     
     if best['market_regime'] == 'Trending':
-        print(f"   Trending market - Momentum strategies favored")
+        print(f"  🎯 Trending market - Momentum strategies favored")
     elif best['market_regime'] == 'Ranging':
         print(f"  🔄 Ranging market - Mean reversion strategies favored")
     else:
